@@ -11,7 +11,7 @@
 	}
 }
 
-$cardSize: 70vmin;
+$cardSize: 20vw;
 
 .card {
 	@include flexCenter;
@@ -74,7 +74,7 @@ $cardSize: 70vmin;
 		@include flexCenter;
 		flex: 0 0 40%;
 		font-family: "Arial Black", Helvetica, sans-serif;
-		font-size: 20vmin;
+		font-size: 10vw;
 		font-weight: bold;
 		height: 100%;
 		max-width: 40%;
@@ -84,16 +84,16 @@ $cardSize: 70vmin;
 #app {
 	&.players_2 {
 		#hull .card_zone {
-			padding-top: 10%;
+			padding-top: 4%;
 		}
 
 		.card {
-			border-width: 3vmin;
-			height: 45vmin;
-			width: 45vmin;
+			border-width: 1vw;
+			height: 20vw;
+			width: 20vw;
 
 			.letter {
-				font-size: 12vmin;
+				font-size: 6vw;
 			}
 		}
 	}

@@ -27,7 +27,7 @@
 		border: 0 none;
 		cursor: pointer;
 		flex: 0 0 20%;
-		font-size: 2vmin;
+		font-size: 2vw;
 
 		img {
 			max-height: 100%;
@@ -46,7 +46,7 @@
 		@include flexCenter;
 		flex: 0 0 60%;
 		font-family: "Arial Black", Helvetica, sans-serif;
-		font-size: 10vmin;
+		font-size: 5vw;
 		font-weight: bold;
 		opacity: 1;
 		transition: opacity 1s;

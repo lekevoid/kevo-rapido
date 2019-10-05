@@ -34,24 +34,21 @@
 		},
 		methods: {
 			changeScore(val) {
-				if (val < 0) {
-					this.confirmState = "minus";
-				} else {
-					this.confirmState = "plus";
-				}
-				this.scoreChangeDisabled = true;
+				if (this.score + val >= 0) {
+					if (val < 0) {
+						this.confirmState = "minus";
+					} else {
+						this.confirmState = "plus";
+					}
+					this.scoreChangeDisabled = true;
 
-				this.score += val;
-				if (this.score < 0) { this.score = 0; }
+					this.score += val;
+					setTimeout(() => { this.resetConfirmState() }, 1000);
+				}
 			},
 			resetConfirmState() {
 				this.confirmState = "";
 				this.scoreChangeDisabled = false;
-			}
-		},
-		watch: {
-			score() {
-				setTimeout(() => { this.resetConfirmState() }, 1000);
 			}
 		}
 	}

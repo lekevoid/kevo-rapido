@@ -62,14 +62,15 @@ body {
 		align-items: center;
 		background-color: transparent;
 		background-image: url("../img/cover.png");
+		background-position: center center;
 		background-repeat: no-repeat;
 		background-size: contain;
 		border: 0 none;
 		cursor: pointer;
 		display: flex;
-		height: 100%;
+		height: 60%;
 		justify-content: center;
-		max-height: 40vmin;
+		max-height: 40vw;
 		transition: filter 0.6s;
 		width: 100%;
 
@@ -85,7 +86,7 @@ body {
 
 #hull {
 	height: 100%;
-	padding: 5vmin;
+	padding: 2vw;
 
 	#turnCard {
 		display: flex;
@@ -97,6 +98,8 @@ body {
 		display: flex;
 		flex-flow: row nowrap;
 		justify-content: space-between;
+		padding-left: 4vw;
+		padding-right: 4vw;
 	}
 
 	.card_zone {
@@ -117,16 +120,15 @@ body {
 			#turnCard {
 				@include flexCenter;
 				flex: 0 0 30%;
-				padding-left: 2vmin;
-				padding-right: 2vmin;
+				padding-left: 2vw;
+				padding-right: 2vw;
 			}
 
 			#cardsBoard {
 				flex: 0 0 70%;
 			}
 
-			.card_zone {
-			}
+			.card_zone {}
 
 			.card_zone:nth-child(1) {
 				transform: rotate(180deg);
