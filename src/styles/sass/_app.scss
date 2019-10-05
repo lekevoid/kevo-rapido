@@ -34,6 +34,11 @@ $lightOrange:#F3B16D;
 
 html {
 	font-size: calc(5px + 0.3vw);
+
+	* {
+		box-sizing: border-box;
+		outline: none;
+	}
 }
 
 body {
@@ -43,11 +48,6 @@ body {
 	overflow: hidden;
 	padding: 0;
 	width: 100vw;
-
-	* {
-		box-sizing: border-box;
-		outline: none;
-	}
 }
 
 #app {
