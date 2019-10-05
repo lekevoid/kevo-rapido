@@ -119,13 +119,13 @@ body {
 
 			#turnCard {
 				@include flexCenter;
-				flex: 0 0 30%;
+				flex: 0 0 20%;
 				padding-left: 2vw;
 				padding-right: 2vw;
 			}
 
 			#cardsBoard {
-				flex: 0 0 70%;
+				flex: 0 0 80%;
 			}
 
 			.card_zone {}

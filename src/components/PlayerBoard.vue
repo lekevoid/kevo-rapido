@@ -3,7 +3,7 @@
 		<button class="minus" @click="changeScore(-1)" :disabled="scoreChangeDisabled"><img :src="btn_minus" /></button>
 		<div :class="['score', {hidden: showScores}]">{{ score }}</div>
 		<button class="plus" @click="changeScore(1)" :disabled="scoreChangeDisabled"><img :src="btn_plus" /></button>
-		<div :class="['confirm', confirmState]">
+		<div :class="['confirm', confirmState, {hidden: !showScores}]">
 			<img class="plus" :src="thumbsup" />
 			<img class="minus" :src="sad" />
 		</div>

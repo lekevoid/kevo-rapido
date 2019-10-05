@@ -69,14 +69,18 @@
 		user-select: none;
 		width: 100%;
 
+		&.hidden {
+			display: none;
+		}
+
 		img {
 			left: 50%;
 			max-height: 100%;
 			max-width: 100%;
 			opacity: 1;
 			position: absolute;
-			top: 0;
-			transform: translateX(-50%);
+			top: 50%;
+			transform: translate(-50%, -50%);
 			object-fit: contain;
 		}
 
