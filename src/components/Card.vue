@@ -45,6 +45,40 @@
 	import profession_green from "../img/profession_green.png";
 	import profession_orange from "../img/profession_orange.png";
 
+	import book_blue from "../img/book_blue.png";
+	import book_green from "../img/book_green.png";
+	import book_orange from "../img/book_orange.png";
+	import adjective_blue from "../img/adjective_blue.png";
+	import adjective_green from "../img/adjective_green.png";
+	import adjective_orange from "../img/adjective_orange.png";
+	import brand_blue from "../img/brand_blue.png";
+	import brand_green from "../img/brand_green.png";
+	import brand_orange from "../img/brand_orange.png";
+	import event_blue from "../img/event_blue.png";
+	import event_green from "../img/event_green.png";
+	import event_orange from "../img/event_orange.png";
+	import fictional_character_blue from "../img/fictional_character_blue.png";
+	import fictional_character_green from "../img/fictional_character_green.png";
+	import fictional_character_orange from "../img/fictional_character_orange.png";
+	import game_blue from "../img/game_blue.png";
+	import game_green from "../img/game_green.png";
+	import game_orange from "../img/game_orange.png";
+	import houseware_blue from "../img/houseware_blue.png";
+	import houseware_green from "../img/houseware_green.png";
+	import houseware_orange from "../img/houseware_orange.png";
+	import location_blue from "../img/location_blue.png";
+	import location_green from "../img/location_green.png";
+	import location_orange from "../img/location_orange.png";
+	import mythology_blue from "../img/mythology_blue.png";
+	import mythology_green from "../img/mythology_green.png";
+	import mythology_orange from "../img/mythology_orange.png";
+	import song_blue from "../img/song_blue.png";
+	import song_green from "../img/song_green.png";
+	import song_orange from "../img/song_orange.png";
+	import verb_blue from "../img/verb_blue.png";
+	import verb_green from "../img/verb_green.png";
+	import verb_orange from "../img/verb_orange.png";
+
 	export default {
 		name: "Card",
 		components: {
@@ -89,7 +123,40 @@
 					"plant_orange" : plant_orange,
 					"profession_blue" : profession_blue,
 					"profession_green" : profession_green,
-					"profession_orange" : profession_orange
+					"profession_orange" : profession_orange,
+					"book_blue" : book_blue,
+					"book_green" : book_green,
+					"book_orange" : book_orange,
+					"adjective_blue" : adjective_blue,
+					"adjective_green" : adjective_green,
+					"adjective_orange" : adjective_orange,
+					"brand_blue" : brand_blue,
+					"brand_green" : brand_green,
+					"brand_orange" : brand_orange,
+					"event_blue " : event_blue,
+					"event_green" : event_green,
+					"event_orange " : event_orange,
+					"fictional_character_blue" : fictional_character_blue,
+					"fictional_character_green" : fictional_character_green,
+					"fictional_character_orange" : fictional_character_orange,
+					"game_blue " : game_blue,
+					"game_green" : game_green,
+					"game_orange" : game_orange,
+					"houseware_blue" : houseware_blue,
+					"houseware_green" : houseware_green,
+					"houseware_orange" : houseware_orange,
+					"location_blue" : location_blue,
+					"location_green" : location_green,
+					"location_orange" : location_orange,
+					"mythology_blue" : mythology_blue,
+					"mythology_green" : mythology_green,
+					"mythology_orange" : mythology_orange,
+					"song_blue" : song_blue,
+					"song_green" : song_green,
+					"song_orange " : song_orange,
+					"verb_blue" : verb_blue,
+					"verb_green" : verb_green,
+					"verb_orange " : verb_orange,
 				};
 
 				return allIcons[this.type.toLowerCase() + "_" + this.color.toLowerCase()];
