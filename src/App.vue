@@ -1,6 +1,7 @@
 <template>
 	<div id="app" :class="[{ is_running: gameStarted }, 'players_'+playersNum]">
-		<div id="toolbar">
+		<div id="toolbar" :class="[{open: toolbarOpen}]">
+			<button id="open" @click="toggleOpenToolbar"></button>
 			<div class="dash players">
 				<button id="add_player" @click="changePlayersNum(1)"><img :src="icon_add_player" /></button>
 				<button id="remove_player" @click="changePlayersNum(-1)"><img :src="icon_remove_player" /></button>
@@ -88,7 +89,8 @@
 				icon_add_player: icon_add_player,
 				icon_remove_player: icon_remove_player,
 				icon_scores: icon_scores,
-				icon_labels: icon_labels
+				icon_labels: icon_labels,
+				toolbarOpen: false
 			}
 		},
 
@@ -155,6 +157,10 @@
 
 			toggleLabels() {
 				this.showLabels = !this.showLabels;
+			},
+
+			toggleOpenToolbar() {
+				this.toolbarOpen = !this.toolbarOpen;
 			}
 		},
 

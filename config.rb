@@ -1,8 +1,8 @@
 #Folder settings
 relative_assets = true
-css_dir = "./"
-sass_dir = "./"
-images_dir = "./img/"
+css_dir = "./src/styles"
+sass_dir = "./src/styles"
+images_dir = "./src/img/"
 
 # You can select your preferred output style here (can be overridden via the command line):
 output_style = :compressed # After dev :compressed
