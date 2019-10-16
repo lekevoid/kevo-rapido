@@ -11,7 +11,7 @@
 	}
 }
 
-$cardSize: 20vw;
+$cardSize: 20vmax;
 
 .card {
 	@include flexCenter;
@@ -74,7 +74,7 @@ $cardSize: 20vw;
 		@include flexCenter;
 		flex: 0 0 40%;
 		font-family: "Arial Black", Helvetica, sans-serif;
-		font-size: 10vw;
+		font-size: 10vmax;
 		font-weight: bold;
 		height: 100%;
 		max-width: 40%;
@@ -88,12 +88,12 @@ $cardSize: 20vw;
 		}
 
 		.card {
-			border-width: 1vw;
-			height: 25vw;
-			width: 25vw;
+			border-width: 1vmax;
+			height: $cardSize;
+			width: $cardSize;
 
 			.letter {
-				font-size: 6vw;
+				font-size: 6vmax;
 			}
 		}
 	}
