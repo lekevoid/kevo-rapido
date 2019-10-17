@@ -1,5 +1,5 @@
 <template>
-	<div id="app" :class="[{ is_running: gameStarted }, 'players_'+playersNum]">
+	<div id="app" :class="[{ is_running: gameStarted, single_card_mode: singleCard }, 'players_'+playersNum]">
 		<div id="toolbar" :class="[{open: toolbarOpen}]">
 			<button id="open" @click="toggleOpenToolbar"></button>
 			<div class="dash players">
@@ -7,10 +7,13 @@
 				<button id="remove_player" @click="changePlayersNum(-1)"><img :src="icon_remove_player" /></button>
 			</div>
 			<div class="dash scores">
-				<button id="toggle_scores" @click="toggleScores"><img :src="icon_scores" /></button>
+				<button id="toggle_scores" :class="[{ active: showScores }]" @click="toggleScores"><img :src="icon_scores" /></button>
 			</div>
 			<div class="dash labels">
-				<button id="toggle_labels" @click="toggleLabels"><img :src="icon_labels" /></button>
+				<button id="toggle_labels" :class="[{ active: showLabels }]" @click="toggleLabels"><img :src="icon_labels" /></button>
+			</div>
+			<div class="dash labels">
+				<button id="toggle_labels" :class="[{ active: singleCard }]" @click="toggleSingleCard">Single Card</button>
 			</div>
 		</div>
 		<div id="hull">
@@ -19,6 +22,7 @@
 			</div>
 			<div id="cardsBoard">
 				<Card v-for="i in playersNum" :key="i" v-if="gameStarted" :type="currentCard.type" :letter="currentCard.letter" :color="currentCard.color" :showScores="showScores" />
+				<Card id="the_one" v-if="gameStarted" single="true" :type="currentCard.type" :letter="currentCard.letter" :color="currentCard.color" :showScores="showScores" />
 			</div>
 		</div>
 	</div>
@@ -90,7 +94,8 @@
 				icon_remove_player: icon_remove_player,
 				icon_scores: icon_scores,
 				icon_labels: icon_labels,
-				toolbarOpen: false
+				toolbarOpen: false,
+				singleCard: false
 			}
 		},
 
@@ -157,6 +162,10 @@
 
 			toggleLabels() {
 				this.showLabels = !this.showLabels;
+			},
+
+			toggleSingleCard() {
+				this.singleCard = !this.singleCard;
 			},
 
 			toggleOpenToolbar() {

@@ -21,7 +21,7 @@ $cardSize: 20vmax;
 	height: $cardSize;
 	padding: #{$cardSize / 20};
 	pointer-events: none;
-	transition: background-color 1s, border-color 1s;
+	transition: background-color 1s, border-color 1s, opacity 1s;
 	user-select: none;
 	width: $cardSize;
 
@@ -78,23 +78,5 @@ $cardSize: 20vmax;
 		font-weight: bold;
 		height: 100%;
 		max-width: 40%;
-	}
-}
-
-#app {
-	&.players_2 {
-		#hull .card_zone {
-			padding-top: 4%;
-		}
-
-		.card {
-			border-width: 0.6vmax;
-			height: $cardSize;
-			width: $cardSize;
-
-			.letter {
-				font-size: 6vmax;
-			}
-		}
 	}
 }

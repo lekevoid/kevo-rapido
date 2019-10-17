@@ -6,7 +6,7 @@
 			</div>
 			<div class="letter">{{letter}}</div>
 		</div>
-		<PlayerBoard :showScores="showScores" />
+		<PlayerBoard v-if="!single" :showScores="showScores" />
 	</div>
 </template>
 
@@ -85,6 +85,7 @@
 			PlayerBoard
 		},
 		props: {
+			single: Boolean,
 			type: String,
 			letter: String,
 			color: String,

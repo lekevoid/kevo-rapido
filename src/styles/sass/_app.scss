@@ -89,21 +89,48 @@ body {
 }
 
 #hull {
+	align-content: center;
+	align-items: center;
+	box-sizing: border-box;
+	display: flex;
+	flex-flow: row nowrap;
 	height: 100%;
-	padding: 2vw;
+	justify-content: space-between;
+	left: 0;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	z-index: 1;
 
 	#turnCard {
-		display: flex;
+		@include flexCenter;
+		@include width(20%);
+		height: 100%;
+		left: 2vmax;
+		padding-left: 2vw;
+		padding-right: 2vw;
+		position: absolute;
+		top: 0;
 	}
 
 	#cardsBoard {
-		align-items: stretch;
-		display: flex;
-		flex-flow: row nowrap;
-		justify-content: space-between;
-		max-width: 80%;
-		padding-left: 4vw;
-		padding-right: 4vw;
+		@include width(80%);
+		display: block;
+		height: 100%;
+		position: absolute;
+		right: 2vmax;
+		top: 0;
+	}
+
+	#the_one {
+		left: 50%;
+		pointer-events: none;
+		position: absolute;
+		top: 50%;
+		transition:opacity 1s;
+		transform: translate(-50%, -50%) scale(1.8);
 	}
 
 	.card_zone {
@@ -111,35 +138,6 @@ body {
 		flex-flow: column nowrap;
 		height: 100%;
 		max-height: 100%;
-	}
-}
-
-#app {
-	&.players_2 {
-		#hull {
-			display: flex;
-			flex-flow: row nowrap;
-			width: 80%;
-
-			#turnCard {
-				@include flexCenter;
-				flex: 0 0 20%;
-				padding-left: 2vw;
-				padding-right: 2vw;
-			}
-
-			#cardsBoard {
-				flex: 0 0 80%;
-			}
-
-			.card_zone {}
-
-			.card_zone:nth-child(1) {
-				transform: rotate(180deg);
-			}
-
-			.card_zone:nth-child(2) {}
-		}
 	}
 }
 
