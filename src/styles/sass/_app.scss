@@ -42,10 +42,23 @@ html {
 }
 
 body {
-	background: linear-gradient(to bottom right, #AAD 0%, #225 100%);
+	background: linear-gradient(to bottom right, darken(#AAD, 50) 0%, darken(#225, 50) 100%);
 	height: 100vh;
 	margin: 0;
 	padding: 0;
+	width: 100vw;
+}
+
+#global {
+	background: linear-gradient(to bottom right, #AAD 0%, #225 100%);
+	background-position: center;
+	height: 100vh;
+	left: 50%;
+	max-height: 768px;
+	max-width: 1024px;
+	position: absolute;
+	top: 50%;
+	transform: translate(-50%, -50%);
 	width: 100vw;
 }
 
@@ -129,8 +142,8 @@ body {
 		pointer-events: none;
 		position: absolute;
 		top: 50%;
-		transition:opacity 1s;
 		transform: translate(-50%, -50%) scale(1.8);
+		transition: opacity 1s;
 	}
 
 	.card_zone {
@@ -149,13 +162,18 @@ body {
 }
 
 @media screen and (orientation: portrait) {
-	body {}
+	#global {
+		height: 100vw;
+		max-height: 100vw;
+		max-width: 100vh;
+		transform: translate(-50%, -50%) rotate(90deg);
+		width: 100vh;
+	}
 
 	#app {
 		height: 100vw;
-		max-height: 1024px;
-		max-width: 768px;
-		transform: rotate(90deg);
+		max-height: 100vw;
+		max-width: 100vh;
 		width: 100vh;
 	}
 }

@@ -1,28 +1,30 @@
 <template>
-	<div id="app" :class="[{ is_running: gameStarted, single_card_mode: singleCard }, 'players_'+playersNum]">
-		<div id="toolbar" :class="[{open: toolbarOpen}]">
-			<button id="open" @click="toggleOpenToolbar"></button>
-			<div class="dash players">
-				<button id="add_player" @click="changePlayersNum(1)"><img :src="icon_add_player" /></button>
-				<button id="remove_player" @click="changePlayersNum(-1)"><img :src="icon_remove_player" /></button>
+	<div id="global">
+		<div id="app" :class="[{ is_running: gameStarted, single_card_mode: singleCard }, 'players_'+playersNum]">
+			<div id="toolbar" :class="[{open: toolbarOpen}]">
+				<button id="open" @click="toggleOpenToolbar"></button>
+				<div class="dash players">
+					<button id="add_player" @click="changePlayersNum(1)"><img :src="icon_add_player" /></button>
+					<button id="remove_player" @click="changePlayersNum(-1)"><img :src="icon_remove_player" /></button>
+				</div>
+				<div class="dash scores">
+					<button id="toggle_scores" :class="[{ active: showScores }]" @click="toggleScores"><img :src="icon_scores" /></button>
+				</div>
+				<div class="dash labels">
+					<button id="toggle_labels" :class="[{ active: showLabels }]" @click="toggleLabels"><img :src="icon_labels" /></button>
+				</div>
+				<div class="dash labels">
+					<button id="toggle_labels" :class="[{ active: singleCard }]" @click="toggleSingleCard">Single Card</button>
+				</div>
 			</div>
-			<div class="dash scores">
-				<button id="toggle_scores" :class="[{ active: showScores }]" @click="toggleScores"><img :src="icon_scores" /></button>
-			</div>
-			<div class="dash labels">
-				<button id="toggle_labels" :class="[{ active: showLabels }]" @click="toggleLabels"><img :src="icon_labels" /></button>
-			</div>
-			<div class="dash labels">
-				<button id="toggle_labels" :class="[{ active: singleCard }]" @click="toggleSingleCard">Single Card</button>
-			</div>
-		</div>
-		<div id="hull">
-			<div id="turnCard">
-				<button @click="newTurn" id="new_turn"></button>
-			</div>
-			<div id="cardsBoard">
-				<Card v-for="i in playersNum" :key="i" v-if="gameStarted" :type="currentCard.type" :letter="currentCard.letter" :color="currentCard.color" :showScores="showScores" />
-				<Card id="the_one" v-if="gameStarted" single="true" :type="currentCard.type" :letter="currentCard.letter" :color="currentCard.color" :showScores="showScores" />
+			<div id="hull">
+				<div id="turnCard">
+					<button @click="newTurn" id="new_turn"></button>
+				</div>
+				<div id="cardsBoard">
+					<Card v-for="i in playersNum" :key="i" v-if="gameStarted" :type="currentCard.type" :letter="currentCard.letter" :color="currentCard.color" :showScores="showScores" :rotate="playerBoardsRotates[i-1]" />
+					<Card id="the_one" v-if="gameStarted" single="true" :type="currentCard.type" :letter="currentCard.letter" :color="currentCard.color" :showScores="showScores" />
+				</div>
 			</div>
 		</div>
 	</div>
@@ -47,6 +49,10 @@
 		data() {
 			return {
 				playersNum: 2,
+				playerBoardsRotates: [
+					0,
+					180
+				],
 				currentCard: {
 					type: "",
 					letter: "",
@@ -174,6 +180,23 @@
 		},
 
 		watch: {
+			playersNum() {
+				switch (this.playersNum) {
+					case 3:
+						this.playerBoardsRotates = [0,180];
+						break;
+					case 4:
+						this.playerBoardsRotates = [0, 120, 240];
+						break;
+					case 5:
+						this.playerBoardsRotates = [0, 72, 144, 216, 288];
+						break;
+					case 6:
+						this.playerBoardsRotates = [0, 60, 120, 180, 240, 300];
+						break;
+					default:
+				}
+			},
 			turn() {
 				if (this.turn > 0) {
 					this.gameStarted = true;
