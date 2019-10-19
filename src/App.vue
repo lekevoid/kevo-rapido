@@ -1,5 +1,5 @@
 <template>
-	<div id="global" v-on:touchend="preventScroll">
+	<div id="global">
 		<div id="app" :class="[{ is_running: gameStarted, single_card_mode: singleCard }, 'players_'+playersNum]">
 			<div id="toolbar" :class="[{open: toolbarOpen}]">
 				<button id="open" @click="toggleOpenToolbar"></button>
@@ -116,10 +116,6 @@
 		},
 
 		methods: {
-			preventScroll(e) {
-				e.preventDefault();
-			},
-
 			shuffle(obj) {
 				if (typeof(obj) === "string") {
 					obj = obj.split("");
@@ -134,9 +130,6 @@
 			newTurn() {
 				this.turn++;
 
-				if (this.turn > 0) {
-					this.gameStarted = true;
-				}
 				// chooseType() will take care of choosing the letter too.
 				this.chooseType();
 				this.chooseColor();
@@ -173,7 +166,6 @@
 			},
 
 			changePlayersNum(val) {
-				console.log(this.playersNum + val);
 				if ((this.playersNum + val) >= 2 && (this.playersNum + val) <= 6) {
 					this.playersNum += val;
 				}
@@ -225,7 +217,9 @@
 				}
 			},
 			turn() {
-
+				if (this.turn > 0) {
+					this.gameStarted = true;
+				}
 			},
 		}
 	}
