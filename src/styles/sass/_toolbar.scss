@@ -48,6 +48,7 @@
 	button {
 		@include width(100%);
 		@include flexCenter;
+		border-radius: 10px;
 		cursor: pointer;
 		height: 60px;
 		padding: 10px;
