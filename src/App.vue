@@ -40,6 +40,10 @@
 	import icon_scores from "./img/icon_scores.svg";
 	import icon_labels from "./img/icon_labels.svg";
 
+	document.getElementById("global").ontouchend = (e) => {
+		e.preventDefault();
+	};
+
 	export default {
 		name: "app",
 
