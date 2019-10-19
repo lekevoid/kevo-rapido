@@ -1,5 +1,5 @@
 <template>
-	<div id="global">
+	<div id="global" v-on:touchend="preventScroll">
 		<div id="app" :class="[{ is_running: gameStarted, single_card_mode: singleCard }, 'players_'+playersNum]">
 			<div id="toolbar" :class="[{open: toolbarOpen}]">
 				<button id="open" @click="toggleOpenToolbar"></button>
@@ -39,10 +39,6 @@
 	import icon_remove_player from "./img/icon_remove_player.svg";
 	import icon_scores from "./img/icon_scores.svg";
 	import icon_labels from "./img/icon_labels.svg";
-
-	document.getElementById("global").ontouchend = (e) => {
-		e.preventDefault();
-	};
 
 	export default {
 		name: "app",
@@ -120,6 +116,10 @@
 		},
 
 		methods: {
+			preventScroll(e) {
+				e.preventDefault();
+			},
+
 			shuffle(obj) {
 				if (typeof(obj) === "string") {
 					obj = obj.split("");
