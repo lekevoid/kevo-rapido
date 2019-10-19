@@ -16,11 +16,32 @@
 }
 
 .player_board {
+	@include flexCenter;
+	align-items: center;
 	display: flex;
-	flex-flow: row nowrap;
-	justify-content: center;
-	position: relative;
-	width: 100%;
+	flex-flow: column nowrap;
+	height: 50vmin;
+	justify-content: flex-end;
+	left: 50%;
+	padding: 40px 0 20px;
+	position: absolute;
+	top: 50%;
+	transform-origin: center top;
+	width: 250px;
+
+	.card_zone {
+		align-items: center;
+		display: flex;
+		flex: 1 1 200px;
+		height: auto;
+		justify-content: center;
+		max-height: 100%;
+		max-width: 100%;
+		min-height: 20vmax;
+		position: relative;
+		transition: opacity 1s;
+		width: 100%;
+	}
 
 	button {
 		@include flexCenter;
@@ -31,9 +52,9 @@
 		flex: 0 0 30%;
 
 		img {
-			height: 6rem;
+			height: 5rem;
 			transition: filter 0.6s;
-			width: 6rem;
+			width: 5rem;
 		}
 
 		&:hover {
@@ -43,19 +64,29 @@
 		}
 	}
 
-	.score {
-		@include flexCenter;
-		flex: 0 0 40%;
-		font-family: "Arial Black", Helvetica, sans-serif;
-		font-size: 8rem;
-		font-weight: bold;
-		opacity: 1;
-		transition: opacity 1s;
+	.scoreBoard {
+		align-items: center;
+		display: flex;
+		flex: 0 0 auto;
+		flex-flow: row nowrap;
+		justify-content: center;
 
-		&.hidden {
-			opacity: 0;
+		.score {
+			@include flexCenter;
+			flex: 1 1 40%;
+			font-family: "Arial Black", Helvetica, sans-serif;
+			font-size: 8rem;
+			font-weight: bold;
+			min-width: 100px;
+			opacity: 1;
+			transition: opacity 1s;
+
+			&.hidden {
+				opacity: 0;
+			}
 		}
 	}
+
 
 	.confirm {
 		height: 100%;
@@ -78,11 +109,11 @@
 			left: 50%;
 			max-height: 100%;
 			max-width: 100%;
-			object-fit: contain;
 			opacity: 1;
 			position: absolute;
 			top: 50%;
 			transform: translate(-50%, -50%);
+			object-fit: contain;
 		}
 
 		&.plus {
@@ -101,6 +132,14 @@
 			}
 		}
 	}
+
+	button.rotate {
+		cursor: e-resize;
+		flex: 1 1 auto;
+		height: auto;
+		padding: 0;
+		width: 100%;
+	}
 }
 
 #app {
@@ -108,5 +147,15 @@
 		.player_board {
 			.score {}
 		}
+	}
+}
+
+#app.single_card_mode {
+	#the_one {
+		opacity: 1;
+	}
+
+	.player_board .card_zone {
+		opacity: 0;
 	}
 }

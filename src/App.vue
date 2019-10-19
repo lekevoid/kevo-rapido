@@ -14,7 +14,7 @@
 					<button id="toggle_labels" :class="[{ active: showLabels }]" @click="toggleLabels"><img :src="icon_labels" /></button>
 				</div>
 				<div class="dash labels">
-					<button id="toggle_labels" :class="[{ active: singleCard }]" @click="toggleSingleCard">Single Card</button>
+					<button id="toggle_labels" :class="[{ active: singleCard && !disableSingleCardBtn }]" @click="toggleSingleCard" :disabled="disableSingleCardBtn">Single Card</button>
 				</div>
 			</div>
 			<div id="hull">
@@ -22,8 +22,8 @@
 					<button @click="newTurn" id="new_turn"></button>
 				</div>
 				<div id="cardsBoard">
-					<Card v-for="i in playersNum" :key="i" v-if="gameStarted" :type="currentCard.type" :letter="currentCard.letter" :color="currentCard.color" :showScores="showScores" :rotate="playerBoardsRotates[i-1]" />
-					<Card id="the_one" v-if="gameStarted" single="true" :type="currentCard.type" :letter="currentCard.letter" :color="currentCard.color" :showScores="showScores" />
+					<PlayerBoard v-for="i in playersNum" :key="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateValue="playerBoardsRotates[i-1]" />
+					<Card id="the_one" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :singleCardRotation="singleCardRotation" />
 				</div>
 			</div>
 		</div>
@@ -32,6 +32,7 @@
 
 <script>
 	import Card from "./components/Card.vue";
+	import PlayerBoard from "./components/PlayerBoard.vue";
 	import "./styles/styles.css";
 
 	import icon_add_player from "./img/icon_add_player.svg";
@@ -43,7 +44,8 @@
 		name: "app",
 
 		components: {
-			Card
+			Card,
+			PlayerBoard
 		},
 
 		data() {
@@ -101,7 +103,9 @@
 				icon_scores: icon_scores,
 				icon_labels: icon_labels,
 				toolbarOpen: false,
-				singleCard: false
+				singleCard: false,
+				singleCardRotation: 0,
+				disableSingleCardBtn: false
 			}
 		},
 
@@ -125,6 +129,15 @@
 
 			newTurn() {
 				this.turn++;
+
+				if (this.turn > 0) {
+					this.gameStarted = true;
+				}
+				// chooseType() will take care of choosing the letter too.
+				this.chooseType();
+				this.chooseColor();
+
+				this.singleCardRotation = (Math.random() * 360);
 			},
 
 			chooseType() {
@@ -182,11 +195,14 @@
 		watch: {
 			playersNum() {
 				switch (this.playersNum) {
+					case 2:
+						this.playerBoardsRotates = [0, 180];
+						break;
 					case 3:
-						this.playerBoardsRotates = [0,180];
+						this.playerBoardsRotates = [0, 120, 240];
 						break;
 					case 4:
-						this.playerBoardsRotates = [0, 120, 240];
+						this.playerBoardsRotates = [0, 90, 180, 270];
 						break;
 					case 5:
 						this.playerBoardsRotates = [0, 72, 144, 216, 288];
@@ -196,14 +212,16 @@
 						break;
 					default:
 				}
+
+				if (this.playersNum >= 5) {
+					this.singleCard = true;
+					this.disableSingleCardBtn = true;
+				} else {
+					this.disableSingleCardBtn = false;
+				}
 			},
 			turn() {
-				if (this.turn > 0) {
-					this.gameStarted = true;
-				}
-				// chooseType() will take care of choosing the letter too.
-				this.chooseType();
-				this.chooseColor();
+
 			},
 		}
 	}
