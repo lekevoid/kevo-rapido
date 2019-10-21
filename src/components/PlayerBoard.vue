@@ -82,13 +82,13 @@
 				}
 
 				if (this.rotateValue % 360 < 90) {
-					this.rotateValue = this.rotateValue - (deltaX / 6) - (deltaY / 6);
+					this.rotateValue = this.rotateValue - (deltaX / 5) - (deltaY / 5);
 				} else if (this.rotateValue % 360 < 180) {
-					this.rotateValue = this.rotateValue + (deltaX / 6) - (deltaY / 6);
+					this.rotateValue = this.rotateValue + (deltaX / 5) - (deltaY / 5);
 				} else if (this.rotateValue % 360 < 270) {
-					this.rotateValue = this.rotateValue + (deltaX / 6) + (deltaY / 6);
+					this.rotateValue = this.rotateValue + (deltaX / 5) + (deltaY / 5);
 				} else {
-					this.rotateValue = this.rotateValue - (deltaX / 6) + (deltaY / 6);
+					this.rotateValue = this.rotateValue - (deltaX / 5) + (deltaY / 5);
 				}
 
 				console.log(this.rotateValue % 360)

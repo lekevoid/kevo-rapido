@@ -134,10 +134,11 @@
 	}
 
 	button.rotate {
+		border: 1px solid #000;
 		cursor: e-resize;
 		flex: 1 1 auto;
 		height: auto;
-		padding: 0;
+		padding: 10px 20px;
 		width: 100%;
 	}
 }
