@@ -134,12 +134,18 @@
 	}
 
 	button.rotate {
-		border: 1px solid #000;
 		cursor: e-resize;
 		flex: 1 1 auto;
 		height: auto;
 		padding: 10px 20px;
-		width: 100%;
+		width: auto;
+
+		img {
+			height: 100%;
+			max-height: 16px;
+			width: 100%;
+			object-fit: contain;
+		}
 	}
 }
 

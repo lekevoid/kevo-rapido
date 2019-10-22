@@ -10,7 +10,7 @@
 				<img class="minus" :src="sad" />
 			</div>
 		</div>
-		<button class="rotate" v-dragged="rotateBoard">Rotate</button>
+		<button class="rotate" v-dragged="rotateBoard"><img :src="rotate_arrows" /></button>
 	</div>
 </template>
 
@@ -20,6 +20,7 @@
 	import btn_minus from "../img/btn_minus.svg";
 	import btn_plus from "../img/btn_plus.svg";
 	import thumbsup from "../img/icon_thumbsup.svg";
+	import rotate_arrows from "../img/rotate_arrows.png";
 	import sad from "../img/icon_sad.svg";
 
 	export default {
@@ -34,6 +35,7 @@
 				scoreChangeDisabled: false,
 				btn_minus: btn_minus,
 				btn_plus: btn_plus,
+				rotate_arrows: rotate_arrows,
 				thumbsup: thumbsup,
 				sad: sad,
 				boardIsRotating: false

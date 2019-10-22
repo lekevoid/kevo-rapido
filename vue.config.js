@@ -1,3 +1,9 @@
 module.exports = {
-  lintOnSave: false
+	lintOnSave: false,
+	pwa: {
+		appleMobileWebAppCapable: "yes",
+		manifestOptions: {
+			display: "standalone"
+		}
+	}
 }
