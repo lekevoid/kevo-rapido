@@ -103,7 +103,7 @@
 				icon_scores: icon_scores,
 				icon_labels: icon_labels,
 				toolbarOpen: false,
-				singleCard: false,
+				singleCard: true,
 				singleCardRotation: 0,
 				disableSingleCardBtn: false
 			}
