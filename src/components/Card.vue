@@ -82,7 +82,9 @@
 			showScores: Boolean,
 			gameStarted: Boolean,
 			currentCard: Object,
-			singleCardRotation: Number
+			singleCardRotation: Number,
+			randomRotate: Boolean,
+			staticRotate: Number
 		},
 		computed: {
 			icon() {
@@ -157,10 +159,14 @@
 			},
 
 			rotateCard() {
-				console.log(this.isTh);
-				if (this.singleCardRotation > 0) {
+
+				if (this.randomRotate){
 					return {
 						transform: "rotate("+this.singleCardRotation+"deg)"
+					};
+				} else {
+					return {
+						transform: "rotate("+this.staticRotate+"deg)"
 					};
 				}
 				return false;

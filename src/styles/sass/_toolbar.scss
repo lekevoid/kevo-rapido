@@ -48,15 +48,20 @@
 	button {
 		@include width(100%);
 		@include flexCenter;
+		background-color: #DDD;
 		border-radius: 10px;
-		background-color:#DDD;
 		cursor: pointer;
 		height: 60px;
 		padding: 10px;
-		transition: box-shadow 0.3s;
+		transition: box-shadow 0.3s, max-width 0.3s, width 0.3s, flex-basis 0.3s, opacity 0.3s;
 
 		&.active {
 			box-shadow: 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80, 0 0 8px inset #F80;
+		}
+
+		&.hide {
+			max-width:0%;
+			opacity:0;
 		}
 
 		img {
@@ -75,13 +80,14 @@
 		max-width: 100%;
 		padding: 10px 10%;
 		width: 100%;
-	}
 
-	.players {
-		button {
-			@include width(48%);
+		&.double {
+			button {
+				@include width(48%);
+			}
 		}
 	}
+
 
 	.scores {}
 }

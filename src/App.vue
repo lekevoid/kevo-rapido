@@ -3,7 +3,7 @@
 		<div id="app" :class="[{ is_running: gameStarted, single_card_mode: singleCard }, 'players_'+playersNum]">
 			<div id="toolbar" :class="[{open: toolbarOpen}]">
 				<button id="open" @click="toggleOpenToolbar"></button>
-				<div class="dash players">
+				<div class="dash players double">
 					<button id="add_player" @click="changePlayersNum(1)"><img :src="icon_add_player" /></button>
 					<button id="remove_player" @click="changePlayersNum(-1)"><img :src="icon_remove_player" /></button>
 				</div>
@@ -13,8 +13,12 @@
 				<div class="dash labels">
 					<button id="toggle_labels" :class="[{ active: showLabels }]" @click="toggleLabels"><img :src="icon_labels" /></button>
 				</div>
-				<div class="dash labels">
+				<div class="dash single_card">
 					<button id="toggle_labels" :class="[{ active: singleCard && !disableSingleCardBtn }]" @click="toggleSingleCard" :disabled="disableSingleCardBtn">Single Card</button>
+				</div>
+				<div :class="['dash', 'random_rotate', { double: !randomRotate }]">
+					<button id="toggle_labels" :class="[{ active: randomRotate }]" @click="toggleRandomRotate">Random Rotate</button>
+					<button id="toggle_labels" :class="[{ hide: randomRotate }]" @click="rotateCard90">Rotate 90&deg;</button>
 				</div>
 			</div>
 			<div id="hull">
@@ -23,7 +27,7 @@
 				</div>
 				<div id="cardsBoard">
 					<PlayerBoard v-for="i in playersNum" :key="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateValue="playerBoardsRotates[i-1]" />
-					<Card id="the_one" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :singleCardRotation="singleCardRotation" />
+					<Card id="the_one" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :singleCardRotation="singleCardRotation" :randomRotate="randomRotate" :staticRotate="staticRotate" />
 				</div>
 			</div>
 		</div>
@@ -105,7 +109,9 @@
 				toolbarOpen: false,
 				singleCard: true,
 				singleCardRotation: 0,
-				disableSingleCardBtn: false
+				disableSingleCardBtn: false,
+				randomRotate: true,
+				staticRotate: 0
 			}
 		},
 
@@ -171,6 +177,13 @@
 				}
 			},
 
+			rotateCard90() {
+				this.staticRotate += 90;
+				if (this.staticRotate >= 360) {
+					this.staticRotate = 0;
+				}
+			},
+
 			toggleScores() {
 				this.showScores = !this.showScores;
 			},
@@ -181,6 +194,10 @@
 
 			toggleSingleCard() {
 				this.singleCard = !this.singleCard;
+			},
+
+			toggleRandomRotate() {
+				this.randomRotate = !this.randomRotate;
 			},
 
 			toggleOpenToolbar() {
