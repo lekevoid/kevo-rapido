@@ -16,9 +16,9 @@
 				<div class="dash single_card">
 					<button id="toggle_labels" :class="[{ active: singleCard && !disableSingleCardBtn }]" @click="toggleSingleCard" :disabled="disableSingleCardBtn">Single Card</button>
 				</div>
-				<div :class="['dash', 'random_rotate', { double: !randomRotate }]">
-					<button id="toggle_labels" :class="[{ active: randomRotate }]" @click="toggleRandomRotate">Random Rotate</button>
-					<button id="toggle_labels" :class="[{ hide: randomRotate }]" @click="rotateCard90">Rotate 90&deg;</button>
+				<div :class="['dash', 'random_rotate', { double: !cardRandomRotate }]">
+					<button id="toggle_labels" :class="[{ active: cardRandomRotate }]" @click="toggleRandomRotate">Random Rotate</button>
+					<button id="toggle_labels" :class="[{ hide: cardRandomRotate }]" @click="rotateCard90">Rotate 90&deg;</button>
 				</div>
 			</div>
 			<div id="hull">
@@ -26,8 +26,8 @@
 					<button @click="newTurn" id="new_turn"></button>
 				</div>
 				<div id="cardsBoard">
-					<PlayerBoard v-for="i in playersNum" :key="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateValue="playerBoardsRotates[i-1]" />
-					<Card id="the_one" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :singleCardRotation="singleCardRotation" :randomRotate="randomRotate" :staticRotate="staticRotate" />
+					<PlayerBoard v-for="i in playersNum" :key="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateOrigValue="playerBoardsRotates[i-1]" />
+					<Card id="the_one" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :singleCardRotation="singleCardRotation" :randomRotate="cardRandomRotate" :staticRotate="cardStaticRotate" />
 				</div>
 			</div>
 		</div>
@@ -54,24 +54,16 @@
 
 		data() {
 			return {
-				playersNum: 2,
-				playerBoardsRotates: [
-					0,
-					180
+				colors: [
+					"blue",
+					"green",
+					"orange"
 				],
 				currentCard: {
 					type: "",
 					letter: "",
 					color: "",
 				},
-				gameStarted: false,
-				showScores: false,
-				showLabels: false,
-				colors: [
-					"blue",
-					"green",
-					"orange"
-				],
 				types: [
 					"Animal",
 					"City",
@@ -95,23 +87,31 @@
 					"Song",
 					"Verb",
 				],
+				playersNum: 2,
+				playerBoardsRotates: [
+					0,
+					180
+				],
+				gameStarted: false,
+				showScores: false,
+				showLabels: false,
+				disableSingleCardBtn: false,
 				lettersMR: "AAAAAAAAAABBBBBBBBCCCCCCCDDDDDDDDEEEEEEEFFFFFFFFGGGGGHHHHHHHIIIIIJJJJJJJKKKKKLLLLLLLLLMMMMMMMMMMNNNNNNNNNNOOOOOOPPPPPPPPQQQRRRRRRRRRRSSSSSSSSSSTTTTTTTTTTTTUUUUVVVVVWWWWWWXXXYYYYZZZ",
 				lettersScrabbleFR: "AAAAAAAAABBCCDDDEEEEEEEEEEEEEEEFFGGHHIIIIIIIIJKLLLLLMMMNNNNNNOOOOOOPPQRRRRRRSSSSSSTTTTTTUUUUUUVVWXYZ",
 				lettersScrabbleEN: "AAAAAAAAABBCCDDDDEEEEEEEEEEEEFFGGGHHIIIIIIIIIJKLLLLMMNNNNNNOOOOOOOOPPQRRRRRRSSSSTTTTTTUUUUVVWWXYYZ",
 				lettersCities: "AAAAAAAAAAAAAAAAAAAAAAAAAAABBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCCCCCCCCCCCCCDDDDDDDDDDDDDDDEEEEEEEFFFFFFFFGGGGGGGGGGGGGGGHHHHHHHHHHHHHHHHHHIIIIIIIIIIJJJJJJJJJJJKKKKKKKKKKKKKKKKKKKKKKKKKKKKKLLLLLLLLLLLLLLLLLLMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMNNNNNNNNNNNNNNNNNNOOOOOOOOOPPPPPPPPPPPPPPPPPPPPPPPQQQQRRRRRRRRRRRRRSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTTTTTTTTTTTTTTTTUUUUUVVVVVVVVVWWWWWWXXXYYYYYYYZZZZZZ",
 				lettersCountries: "AAAAAAAAAAABBBBBBBBBBBBBBBBBCCCCCCCCCCCCCCCCCDDDDDEEEEEEEEFFFGGGGGGGGGGGHHHHIIIIIIIIJJJKKKKKLLLLLLLLLMMMMMMMMMMMMMMMMMMNNNNNNNNNNNOPPPPPPPPPPQRRRSSSSSSSSSSSSSSSSSSSSSSSSSSTTTTTTTTTTTUUUUUUUVVVYZZ",
 				lang: "fr",
-				turn: 0,
 				icon_add_player: icon_add_player,
+				icon_labels: icon_labels,
 				icon_remove_player: icon_remove_player,
 				icon_scores: icon_scores,
-				icon_labels: icon_labels,
-				toolbarOpen: false,
 				singleCard: true,
 				singleCardRotation: 0,
-				disableSingleCardBtn: false,
-				randomRotate: true,
-				staticRotate: 0
+				toolbarOpen: false,
+				turn: 0,
+				cardRandomRotate: true,
+				cardStaticRotate: 0
 			}
 		},
 
@@ -178,9 +178,9 @@
 			},
 
 			rotateCard90() {
-				this.staticRotate += 90;
-				if (this.staticRotate >= 360) {
-					this.staticRotate = 0;
+				this.cardStaticRotate += 90;
+				if (this.cardStaticRotate >= 360) {
+					this.cardStaticRotate = 0;
 				}
 			},
 
@@ -197,7 +197,7 @@
 			},
 
 			toggleRandomRotate() {
-				this.randomRotate = !this.randomRotate;
+				this.cardRandomRotate = !this.cardRandomRotate;
 			},
 
 			toggleOpenToolbar() {

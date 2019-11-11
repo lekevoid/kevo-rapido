@@ -38,14 +38,15 @@
 				rotate_arrows: rotate_arrows,
 				thumbsup: thumbsup,
 				sad: sad,
-				boardIsRotating: false
+				boardIsRotating: false,
+				rotateValue: this.rotateOrigValue
 			}
 		},
 		props: {
 			gameStarted: Boolean,
 			single: Boolean,
 			showScores: Boolean,
-			rotateValue: Number,
+			rotateOrigValue: Number,
 			currentCard: Object
 		},
 		computed: {
@@ -93,15 +94,19 @@
 					this.rotateValue = this.rotateValue - (deltaX / 5) + (deltaY / 5);
 				}
 
-				console.log(this.rotateValue % 360)
+				if (this.rotateValue > 360) {
+					this.rotateValue = 0;
+				}
+
+				if (this.rotateValue < 0) {
+					this.rotateValue = 359;
+				}
 			}
 		},
 		watch: {
-			/*`
 			rotateValue() {
-				this.rotate = { transform: "rotate("+this.rotateValue+"deg)" }
+				console.log(this.rotateValue);
 			}
-			*/
 		}
 	}
 </script>
