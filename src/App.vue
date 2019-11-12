@@ -26,7 +26,7 @@
 					<button @click="newTurn" id="new_turn"></button>
 				</div>
 				<div id="cardsBoard">
-					<PlayerBoard v-for="i in playersNum" :key="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateOrigValue="playerBoardsRotates[i-1]" />
+					<PlayerBoard v-for="i in playersNum" :key="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateOrigValue="playerBoardsRotates[i-1]" :turn="turn" />
 					<Card id="the_one" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :singleCardRotation="singleCardRotation" :randomRotate="cardRandomRotate" :staticRotate="cardStaticRotate" />
 				</div>
 			</div>

@@ -10,7 +10,16 @@
 				<img class="minus" :src="sad" />
 			</div>
 		</div>
-		<button class="rotate" v-dragged="rotateBoard"><img :src="rotate_arrows" /></button>
+		<div class="options2">
+			<button class="rotate" v-dragged="rotateBoard"><img :src="rotate_arrows" /></button>
+			<button class="minus" @click="changeHandicap(-1)" :disabled="handicapChangeDisabled">
+				<span class="btn_arrow left"></span>
+			</button>
+			<div class="handicap">{{ handicap }}</div>
+			<button class="plus" @click="changeHandicap(1)" :disabled="handicapChangeDisabled">
+				<span class="btn_arrow right"></span>
+			</button>
+		</div>
 	</div>
 </template>
 
@@ -39,7 +48,9 @@
 				thumbsup: thumbsup,
 				sad: sad,
 				boardIsRotating: false,
-				rotateValue: this.rotateOrigValue
+				rotateValue: this.rotateOrigValue,
+				handicap: 0,
+				handicapChangeDisabled: false,
 			}
 		},
 		props: {
@@ -47,7 +58,8 @@
 			single: Boolean,
 			showScores: Boolean,
 			rotateOrigValue: Number,
-			currentCard: Object
+			currentCard: Object,
+			turn: Number
 		},
 		computed: {
 			rotate() {
@@ -67,12 +79,26 @@
 					this.scoreChangeDisabled = true;
 
 					this.score += val;
-					setTimeout(() => { this.resetConfirmState() }, 1000);
+					setTimeout(() => { this.resetConfirmState() }, 500);
+				}
+			},
+			changeHandicap(val) {
+				if (this.handicap + val >= 0) {
+					if (val < 0) {
+						this.confirmState = "minus";
+					} else {
+						this.confirmState = "plus";
+					}
+					this.handicapChangeDisabled = true;
+
+					this.handicap += val;
+					setTimeout(() => { this.resetConfirmState() }, 500);
 				}
 			},
 			resetConfirmState() {
 				this.confirmState = "";
 				this.scoreChangeDisabled = false;
+				this.handicapChangeDisabled = false;
 			},
 			rotateBoard({ el, deltaX, deltaY, offsetX, offsetY, clientX, clientY, first, last }) {
 				if (first) {
@@ -104,9 +130,11 @@
 			}
 		},
 		watch: {
+			/*
 			rotateValue() {
 				console.log(this.rotateValue);
 			}
+			*/
 		}
 	}
 </script>
