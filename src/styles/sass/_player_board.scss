@@ -41,7 +41,12 @@
 	position: absolute;
 	top: 50%;
 	transform-origin: center top;
+	transition: opacity 0.1s;
 	width: 250px;
+
+	&.hide {
+		opacity: 0;
+	}
 
 	.card_zone {
 		align-items: center;
@@ -77,14 +82,22 @@
 		}
 
 		&.toggle_options {
-			background-color: #080;
+			background: linear-gradient(to bottom, #8F8 0%, #060 100%);
 			border-radius: 4px;
-			padding: 8px 16px;
+			font-family: "Arial Black", Helvetica, sans-serif;
+			padding: 6px 14px 5px;
 			pointer-events: all;
+			transition: filter 0.3s;
 
 			&:hover {
-				background-color: #008;
+				filter: brightness(1.5);
 			}
+
+			&:active {
+				animation: pressBtn 0.6s;
+				filter: brightness(1.5);
+			}
+
 		}
 	}
 

@@ -1,5 +1,5 @@
 <template>
-	<div class="player_board" :style="rotate">
+	<div :class="['player_board', { hide: hideBoard }]" :style="rotate">
 		<Card :gameStarted="gameStarted" :currentCard="currentCard"></Card>
 		<div class="options">
 			<div class="row">
@@ -45,11 +45,13 @@
 				sad: sad,
 				boardIsRotating: false,
 				rotateValue: this.rotateOrigValue,
+				hideBoard: false
 			}
 		},
 		props: {
 			playerNum: Number,
 			gameStarted: Boolean,
+			handicap: Number,
 			single: Boolean,
 			showScores: Boolean,
 			rotateOrigValue: Number,
@@ -110,16 +112,21 @@
 					this.rotateValue = 359;
 				}
 			},
+			toggleHideBoard() {
+				this.hideBoard = !this.hideBoard;
+			},
 			toggleOptions() {
 				this.$parent.togglePlayerOptions(this.playerNum);
 			}
 		},
 		watch: {
-			/*
-			rotateValue() {
-				console.log(this.rotateValue);
+			turn() {
+				if (this.handicap > 0) {
+					const timer = this.handicap * 1000;
+					this.toggleHideBoard();
+					setTimeout(() => { this.toggleHideBoard(); }, timer)
+				}
 			}
-			*/
 		}
 	}
 </script>

@@ -26,7 +26,7 @@
 					<button @click="newTurn" id="new_turn"></button>
 				</div>
 				<div id="cardsBoard">
-					<PlayerBoard v-for="i in playersNum" :key="'board'+i" :playerNum="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateOrigValue="playerBoardsRotates[i-1]" :turn="turn" />
+					<PlayerBoard v-for="i in playersNum" :key="'board'+i" :playerNum="i" :gameStarted="gameStarted" :currentCard="currentCard" :handicap="playerHandicaps[i-1]" :showScores="showScores" :rotateOrigValue="playerBoardsRotates[i-1]" :turn="turn" />
 					<div v-for="i in playersNum" :key="'options'+i" :class="['modal', { active : showPlayerOptions === i }]" @click="togglePlayerOptions(i)">
 						<div class="options" @click.stop.prevent>
 							<h2>Player {{i}} Options</h2>
@@ -34,12 +34,16 @@
 								<tr>
 									<td>Handicap</td>
 									<td>
-										<button class="minus" @click="changePlayerHandicap(i, -1)" :disabled="handicapChangeDisabled">
-											<span class="btn_arrow left">&lt;</span>
+										<button @click="changePlayerHandicap(i, -1)" :disabled="handicapChangeDisabled">
+											<span class="btn_arrow left"></span>
 										</button>
+									</td>
+									<td>
 										<div class="handicap">{{ playerHandicaps[i-1] }}</div>
-										<button class="plus" @click="changePlayerHandicap(i, 1)" :disabled="handicapChangeDisabled">
-											<span class="btn_arrow right">&gt;</span>
+									</td>
+									<td>
+										<button @click="changePlayerHandicap(i, 1)" :disabled="handicapChangeDisabled">
+											<span class="btn_arrow right"></span>
 										</button>
 									</td>
 								</tr>
