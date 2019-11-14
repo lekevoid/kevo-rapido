@@ -1,24 +1,20 @@
 <template>
 	<div class="player_board" :style="rotate">
 		<Card :gameStarted="gameStarted" :currentCard="currentCard"></Card>
-		<div class="scoreBoard">
-			<button class="minus" @click="changeScore(-1)" :disabled="scoreChangeDisabled"><img :src="btn_minus" /></button>
-			<div :class="['score', {hidden: showScores}]">{{ score }}</div>
-			<button class="plus" @click="changeScore(1)" :disabled="scoreChangeDisabled"><img :src="btn_plus" /></button>
-			<div :class="['confirm', confirmState, {hidden: !showScores}]">
-				<img class="plus" :src="thumbsup" />
-				<img class="minus" :src="sad" />
+		<div class="options">
+			<div class="row">
+				<button class="minus" @click="changeScore(-1)" :disabled="scoreChangeDisabled"><img :src="btn_minus" /></button>
+				<div :class="['score', {hidden: showScores}]">{{ score }}</div>
+				<button class="plus" @click="changeScore(1)" :disabled="scoreChangeDisabled"><img :src="btn_plus" /></button>
+				<div :class="['confirm_score_change', confirmScoreChangeState, {hidden: !showScores}]">
+					<img class="plus" :src="thumbsup" />
+					<img class="minus" :src="sad" />
+				</div>
 			</div>
-		</div>
-		<div class="options2">
-			<button class="rotate" v-dragged="rotateBoard"><img :src="rotate_arrows" /></button>
-			<button class="minus" @click="changeHandicap(-1)" :disabled="handicapChangeDisabled">
-				<span class="btn_arrow left"></span>
-			</button>
-			<div class="handicap">{{ handicap }}</div>
-			<button class="plus" @click="changeHandicap(1)" :disabled="handicapChangeDisabled">
-				<span class="btn_arrow right"></span>
-			</button>
+			<div class="row">
+				<button class="rotate" v-dragged.prevent="rotateBoard"><img :src="rotate_arrows" /></button>
+				<button class="toggle_options" @click="toggleOptions()">Options</button>
+			</div>
 		</div>
 	</div>
 </template>
@@ -40,7 +36,7 @@
 		data() {
 			return {
 				score: 0,
-				confirmState: "",
+				confirmScoreChangeState: "",
 				scoreChangeDisabled: false,
 				btn_minus: btn_minus,
 				btn_plus: btn_plus,
@@ -49,11 +45,10 @@
 				sad: sad,
 				boardIsRotating: false,
 				rotateValue: this.rotateOrigValue,
-				handicap: 0,
-				handicapChangeDisabled: false,
 			}
 		},
 		props: {
+			playerNum: Number,
 			gameStarted: Boolean,
 			single: Boolean,
 			showScores: Boolean,
@@ -72,9 +67,9 @@
 			changeScore(val) {
 				if (this.score + val >= 0) {
 					if (val < 0) {
-						this.confirmState = "minus";
+						this.confirmScoreChangeState = "minus";
 					} else {
-						this.confirmState = "plus";
+						this.confirmScoreChangeState = "plus";
 					}
 					this.scoreChangeDisabled = true;
 
@@ -82,21 +77,8 @@
 					setTimeout(() => { this.resetConfirmState() }, 500);
 				}
 			},
-			changeHandicap(val) {
-				if (this.handicap + val >= 0) {
-					if (val < 0) {
-						this.confirmState = "minus";
-					} else {
-						this.confirmState = "plus";
-					}
-					this.handicapChangeDisabled = true;
-
-					this.handicap += val;
-					setTimeout(() => { this.resetConfirmState() }, 500);
-				}
-			},
 			resetConfirmState() {
-				this.confirmState = "";
+				this.confirmScoreChangeState = "";
 				this.scoreChangeDisabled = false;
 				this.handicapChangeDisabled = false;
 			},
@@ -127,6 +109,9 @@
 				if (this.rotateValue < 0) {
 					this.rotateValue = 359;
 				}
+			},
+			toggleOptions() {
+				this.$parent.togglePlayerOptions(this.playerNum);
 			}
 		},
 		watch: {

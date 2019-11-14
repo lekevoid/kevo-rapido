@@ -26,7 +26,26 @@
 					<button @click="newTurn" id="new_turn"></button>
 				</div>
 				<div id="cardsBoard">
-					<PlayerBoard v-for="i in playersNum" :key="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateOrigValue="playerBoardsRotates[i-1]" :turn="turn" />
+					<PlayerBoard v-for="i in playersNum" :key="'board'+i" :playerNum="i" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :rotateOrigValue="playerBoardsRotates[i-1]" :turn="turn" />
+					<div v-for="i in playersNum" :key="'options'+i" :class="['modal', { active : showPlayerOptions === i }]" @click="togglePlayerOptions(i)">
+						<div class="options" @click.stop.prevent>
+							<h2>Player {{i}} Options</h2>
+							<table>
+								<tr>
+									<td>Handicap</td>
+									<td>
+										<button class="minus" @click="changePlayerHandicap(i, -1)" :disabled="handicapChangeDisabled">
+											<span class="btn_arrow left">&lt;</span>
+										</button>
+										<div class="handicap">{{ playerHandicaps[i-1] }}</div>
+										<button class="plus" @click="changePlayerHandicap(i, 1)" :disabled="handicapChangeDisabled">
+											<span class="btn_arrow right">&gt;</span>
+										</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
 					<Card id="the_one" :gameStarted="gameStarted" :currentCard="currentCard" :showScores="showScores" :singleCardRotation="singleCardRotation" :randomRotate="cardRandomRotate" :staticRotate="cardStaticRotate" />
 				</div>
 			</div>
@@ -92,6 +111,11 @@
 					0,
 					180
 				],
+				playerHandicaps: [
+					0,
+					0
+				],
+				handicapChangeDisabled: false,
 				gameStarted: false,
 				showScores: false,
 				showLabels: false,
@@ -111,7 +135,8 @@
 				toolbarOpen: false,
 				turn: 0,
 				cardRandomRotate: true,
-				cardStaticRotate: 0
+				cardStaticRotate: 0,
+				showPlayerOptions: null
 			}
 		},
 
@@ -177,6 +202,16 @@
 				}
 			},
 
+			changePlayerHandicap(player, val) {
+				const num = player-1;
+				this.handicapChangeDisabled = true;
+				if (this.playerHandicaps[num] || this.playerHandicaps[num] === 0) {
+					if (this.playerHandicaps[num] + val >= 0) {
+						this.playerHandicaps[num] += val;
+					}
+				}
+			},
+
 			rotateCard90() {
 				this.cardStaticRotate += 90;
 				if (this.cardStaticRotate >= 360) {
@@ -190,6 +225,14 @@
 
 			toggleLabels() {
 				this.showLabels = !this.showLabels;
+			},
+
+			togglePlayerOptions(i) {
+				if (this.showPlayerOptions === i) {
+					this.showPlayerOptions = null;
+				} else {
+					this.showPlayerOptions = i;
+				}
 			},
 
 			toggleSingleCard() {
@@ -226,12 +269,25 @@
 					default:
 				}
 
-				if (this.playersNum >= 5) {
+				for (let x=0; x<this.playersNum; x++) {
+					//if (this.playerHandicaps[x]) {
+
+					//}
+				}
+
+				if (this.playersNum >= 4) {
 					this.singleCard = true;
 					this.disableSingleCardBtn = true;
 				} else {
 					this.disableSingleCardBtn = false;
 				}
+			},
+			handicapChangeDisabled() {
+				/*
+				Little sleight of hand to force the playerHandicaps array to detect an update ;
+				apparently changing one value in an array in the data() doesn't count as reactive.
+				*/
+				this.handicapChangeDisabled = false;
 			},
 			turn() {
 				if (this.turn > 0) {

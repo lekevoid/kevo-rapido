@@ -75,14 +75,33 @@
 		&:active {
 			animation: pressBtn 0.6s linear;
 		}
+
+		&.toggle_options {
+			background-color: #080;
+			border-radius: 4px;
+			padding: 8px 16px;
+			pointer-events: all;
+
+			&:hover {
+				background-color: #008;
+			}
+		}
 	}
 
-	.scoreBoard {
+	.options {
 		align-items: center;
 		display: flex;
 		flex: 1 1 auto;
-		flex-flow: row nowrap;
+		flex-flow: column nowrap;
 		justify-content: center;
+
+		.row {
+			align-items: center;
+			display: flex;
+			flex: 1 1 auto;
+			flex-flow: row nowrap;
+			justify-content: space-between;
+		}
 
 		.score {
 			@include flexCenter;
@@ -100,45 +119,7 @@
 		}
 	}
 
-	.options2 {
-		align-items: center;
-		display: flex;
-		flex: 1 1 auto;
-		height: 30px;
-		justify-content: space-between;
-		max-width: 100%;
-		width: 100%;
-
-		.handicap {
-			@include flexCenter;
-			font-family: "Arial Black", Helvetica, sans-serif;
-			font-size: 4rem;
-			font-weight: bold;
-			opacity: 1;
-			transition: opacity 1s;
-		}
-
-		button {
-			height: 60px;
-
-			.btn_arrow {
-				border-color: transparent;
-				border-style: solid;
-
-				&.left {
-					border-right-color: #000;
-					border-width: 10px 20px 10px 0;
-				}
-
-				&.right {
-					border-left-color: #000;
-					border-width: 10px 0 10px 20px;
-				}
-			}
-		}
-	}
-
-	.confirm {
+	.confirm_score_change {
 		height: 100%;
 		left: 50%;
 		max-height: 100%;
@@ -186,7 +167,7 @@
 	button.rotate {
 		cursor: e-resize;
 		flex: 1 1 auto;
-		height: auto;
+		height: 30px;
 		padding: 10px 20px;
 		width: auto;
 
@@ -195,6 +176,26 @@
 			max-height: 16px;
 			width: 100%;
 			object-fit: contain;
+		}
+	}
+
+	.modal {
+		@include flexCenter;
+		background-color: rgba(#225, 0.8);
+		background-position: center;
+		flex: 0 0 100vw;
+		height: 100vh;
+		left: 0;
+		max-height: 768px;
+		max-width: 1024px;
+		pointer-events: none;
+		position: fixed;
+		top: 0;
+		width: 100vw;
+
+		&.active {
+			opacity: 1;
+			pointer-events: all;
 		}
 	}
 }
